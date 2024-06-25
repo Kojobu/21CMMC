@@ -577,6 +577,7 @@ def run_mcmc(
         return sampler, result
 
     else:
+        # didn't spawn Pools in my case, setting mp_context (either spawn or fork) fixed it
         pool = mcmc_options.pop(
             "pool",
             ProcessPoolExecutor(max_workers=mcmc_options.get("threadCount", 1), mp_context='spawn'),
