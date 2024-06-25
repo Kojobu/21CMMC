@@ -579,7 +579,7 @@ def run_mcmc(
     else:
         pool = mcmc_options.pop(
             "pool",
-            ProcessPoolExecutor(max_workers=mcmc_options.get("threadCount", 1)),
+            ProcessPoolExecutor(max_workers=mcmc_options.get("threadCount", 1), mp_context='spawn'),
         )
         sampler = sampler_cls(
             continue_sampling=continue_sampling,
