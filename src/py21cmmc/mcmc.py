@@ -8,6 +8,9 @@ from os import mkdir, path
 from py21cmfast import yaml
 from py21cmfast._utils import ParameterError
 
+# from concurrent.futures import ProcessPoolExecutor
+from schwimmbad import MultiPool
+
 from .cosmoHammer import (
     CosmoHammerSampler,
     HDFStorageUtil,
