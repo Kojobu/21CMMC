@@ -3,11 +3,12 @@ import logging
 import numpy as np
 import scipy.stats as stats
 from cmath import log
-#from concurrent.futures import ProcessPoolExecutor
-from schwimmbad import MultiPool
 from os import mkdir, path
 from py21cmfast import yaml
 from py21cmfast._utils import ParameterError
+
+# from concurrent.futures import ProcessPoolExecutor
+from schwimmbad import MultiPool
 
 from .cosmoHammer import (
     CosmoHammerSampler,
