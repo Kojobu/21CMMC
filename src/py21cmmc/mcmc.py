@@ -3,8 +3,7 @@ import logging
 import numpy as np
 import scipy.stats as stats
 from cmath import log
-#from concurrent.futures import ProcessPoolExecutor
-from schwimmbad import MultiPool
+from concurrent.futures import ProcessPoolExecutor
 from os import mkdir, path
 from py21cmfast import yaml
 from py21cmfast._utils import ParameterError
@@ -581,7 +580,7 @@ def run_mcmc(
         # didn't spawn Pools in my case, setting mp_context (either spawn or fork) fixed it
         pool = mcmc_options.pop(
             "pool",
-            MultiPool(processes=mcmc_options.get("threadCount", 1)),
+            ProcessPoolExecutor(max_workers=mcmc_options.get("threadCount", 1), max_tasks_per_child=1, mp_context='spawn'),
         )
         sampler = sampler_cls(
             continue_sampling=continue_sampling,
