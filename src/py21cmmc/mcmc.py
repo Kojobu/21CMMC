@@ -8,9 +8,6 @@ from os import mkdir, path
 from py21cmfast import yaml
 from py21cmfast._utils import ParameterError
 
-# from concurrent.futures import ProcessPoolExecutor
-from schwimmbad import MultiPool
-
 from .cosmoHammer import (
     CosmoHammerSampler,
     HDFStorageUtil,
@@ -580,7 +577,6 @@ def run_mcmc(
         return sampler, result
 
     else:
-        # didn't spawn Pools in my case, setting mp_context (either spawn or fork) fixed it
         pool = mcmc_options.pop(
             "pool",
             ProcessPoolExecutor(
