@@ -7,6 +7,7 @@ from concurrent.futures import ProcessPoolExecutor
 from os import mkdir, path
 from py21cmfast import yaml
 from py21cmfast._utils import ParameterError
+from multiprocessing import set_start_method
 
 from .cosmoHammer import (
     CosmoHammerSampler,
@@ -577,12 +578,12 @@ def run_mcmc(
         return sampler, result
 
     else:
+        set_start_method('spawn')
         pool = mcmc_options.pop(
             "pool",
             ProcessPoolExecutor(
                 max_workers=mcmc_options.get("threadCount", 1),
                 max_tasks_per_child=1,
-                mp_context="spawn",
             ),
         )
         sampler = sampler_cls(
